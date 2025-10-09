@@ -63,3 +63,24 @@ A reference of [Sentinel 2 Bands and Band Combinations](https://gisgeography.com
 ## Check out this demo
 
 [https://youtu.be/u-FCX4RjsxM](https://youtu.be/u-FCX4RjsxM)
+
+## Lab 1-b Using Satellite Imagery Data on Google Earth Engine
+
+This lab will introduce you data accessing and preparation through Google Earth Engine.
+
+You will:
+
+* **Authenticate and access Google Earth Engine** API.
+* Familiarize yourself with **two GEE workflows** using different programming languages (JavaScript in Code Editor and Python in Google Colab).
+* **Set up the environment on Google Colab** and **Set up the GEE API** connection.
+* Perform **Data access and data preparation** through programming (filtering, compositing).
+* Learn some **key indices and their false color combinations**, e.g.:
+    * **NDVI** (Normalized Difference Vegetation Index) for vegetation.
+    * **NDWI** (Normalized Difference Water Index) for water and moisture.
+    * **NDBI** (Normalized Difference Built-up Index) for urban areas and buildings.
+ 
+Launch the Lab: Google Colab Notebook
+
+Click the link below to begin your lab. To save your changes, please go to File → Save a copy in Drive within the Colab notebook.
+
+[**Lab 1-b **](https://colab.research.google.com/drive/1PpSRoedfAyyxjImcGEHd9YJ5S-LXnxgY?usp=sharing)
