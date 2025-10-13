@@ -84,3 +84,39 @@ Launch the Lab: Google Colab Notebook
 Click the link below to begin your lab. To save your changes, please go to File → Save a copy in Drive within the Colab notebook.
 
 [**Lab 1-b **](https://colab.research.google.com/drive/1PpSRoedfAyyxjImcGEHd9YJ5S-LXnxgY?usp=sharing)
+
+### Sentinel-2 Spectral Bands Overview
+
+| GEE Band ID | Band Name | Wavelength Center ($\mu m$) | Resolution (meters) | Primary Use |
+| :--- | :--- | :---: | :---: | :--- |
+| **B1** | Coastal Aerosol | 0.443 | 60 m | Atmospheric correction, coastal studies |
+| **B2** | Blue | 0.490 | **10 m** | Water penetration, soil discrimination |
+| **B3** | Green | 0.560 | **10 m** | Vegetation, clear water (for **NDWI**) |
+| **B4** | Red | 0.665 | **10 m** | Vegetation absorption (for **NDVI**), urban areas |
+| **B5** | Red Edge 1 | 0.705 | **20 m** | Vegetation health, Red Edge indices |
+| **B6** | Red Edge 2 | 0.740 | **20 m** | Vegetation health, Red Edge indices |
+| **B7** | Red Edge 3 | 0.783 | **20 m** | Vegetation health, Red Edge indices |
+| **B8** | Near Infrared (NIR) | 0.842 | **10 m** | **Biomass content** (for **NDVI, NDWI**) |
+| **B8A** | Narrow NIR | 0.865 | **20 m** | Vegetation monitoring, atmospheric correction |
+| **B9** | Water Vapor | 0.945 | 60 m | Atmospheric water vapor detection |
+| **B10** | SWIR - Cirrus | 1.375 | 60 m | Cirrus cloud detection |
+| **B11** | Short-Wave Infrared (SWIR 1) | 1.610 | **20 m** | **Moisture content** (for **NDBI, NDMI**) |
+| **B12** | Short-Wave Infrared (SWIR 2) | 2.190 | **20 m** | Geology, mineral mapping |
+
+[Sentinel 2 Bands and Band Combinations](https://gisgeography.com/sentinel-2-bands-combinations/)
+
+## Remote Sensing Indices and False Color Composites
+False Color Composites (FCCs) are fundamental to visual interpretation and analysis in remote sensing. Different band combinations enhance specific land cover characteristics, while Normalized Difference Indices (NDIs) are key for quantifying these features.
+
+Below are several crucial indices and their corresponding False Color Composites for different application purposes.
+
+### Crucial Indices and Their False Color Composites
+
+| Application Purpose | Key Index (NDI) | Normalized Formula | Common Band Composite (R-G-B) | Description / Enhanced Features |
+| :--- | :--- | :--- | :--- | :--- |
+| **Vegetation Health / Biomass** | **NDVI** (Normalized Difference Vegetation Index) | $\frac{(NIR - RED)}{(NIR + RED)}$ | **NIR - RED - GREEN** (e.g., Sentinel-2 **B8-B4-B3**) | **Healthy vegetation** is highlighted in **bright red**. Used for monitoring growth and density. |
+| **Water Bodies / Moisture** | **NDWI** (Normalized Difference Water Index) | $\frac{(GREEN - NIR)}{(GREEN + NIR)}$ | **NIR - SWIR - BLUE** (e.g., Sentinel-2 **B8-B11-B2**) | **Open water bodies** are displayed in deep blue or black. Used for monitoring water extent and moisture. |
+| **Urban / Built-up Areas** | **NDBI** (Normalized Difference Built-up Index) | $\frac{(SWIR - NIR)}{(SWIR + NIR)}$ | **SWIR - NIR - BLUE** (e.g., Sentinel-2 **B11-B8-B2**) | **Urban areas and concrete** are highlighted in **magenta/cyan**. Used for urban sprawl analysis. |
+| **Soil/Vegetation Background** | **SAVI** (Soil Adjusted Vegetation Index) | $\frac{(NIR - RED)}{(NIR + RED + L)} \cdot (1 + L)$ | Similar to NDVI (NIR-RED-GREEN) | A modified NDVI that minimizes the influence of **soil background** brightness ($L$ is the soil adjustment factor). |
+
+**Hints for lab assignment**: You are supposed to provide interpretations for the values range you set (the min and max parameters in visualization code you used for NDVI, NDWI, etc.) and the land cover (water, snow, clouds, rock, bare ground, or non-vegetated urban areas, bare soil, built-up areas, or senescing (dying) plants, forest ...) 
