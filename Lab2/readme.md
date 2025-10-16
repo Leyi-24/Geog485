@@ -6,6 +6,7 @@
 3.  You will be using your image interpretation skills to generate training data.
 
 At this point you can navigate to EarthExplorer, download your Landsat images and then read on.
+
 # Classification Methods Overview
 **Image Classification Basics:** Image classification is the process of categorizing and labeling pixels or groups of pixels in satellite or aerial images based on their spectral values. This process allows us to analyze and interpret complex patterns and information contained within the images, transforming raw data into more meaningful information that can be used for various applications.
 
@@ -132,3 +133,15 @@ First, consider: what is it you would like to investigate about the landscape? H
 See if your output looks any better than this but remember this was unsupervised:
 ![4](https://github.com/user-attachments/assets/97c7d8aa-cc8f-4073-9e9b-1a8480decd0c)
 
+# Deliverables for both Part 1 and Part 2
+You need to upload a PDF answering below questions:
+   * What is your research question?
+   * Did the unsupervised or supervised classification perform better and what makes you say so?
+   * What is the K-Means clustering algorithm doing? Check out google or the QGIS documentation for the tool
+   * What is the K nearest neighbors algorithm doing?
+   * What kinds of biases could be introduced in the training process?
+   * How was your training data distributed spatially? Did you favor a particular area of the image?
+   * Around how many observations did you have for each class?
+   * What input raster bands did you use when predicting?
+   * 
+Insert screenshots of the unsupervised result, and your supervised results with brief figure captions.
