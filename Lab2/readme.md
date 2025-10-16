@@ -7,16 +7,50 @@
 
 At this point you can navigate to EarthExplorer, download your Landsat images and then read on.
 # Classification Methods Overview
+**Image Classification Basics:** Image classification is the process of categorizing and labeling pixels or groups of pixels in satellite or aerial images based on their spectral values. This process allows us to analyze and interpret complex patterns and information contained within the images, transforming raw data into more meaningful information that can be used for various applications.
 
-**Part one:** Unsupervised classification.
+**Purpose of image classification in GIS and remote sensing**: Image classification plays a critical role in GIS and remote sensing, as it helps in extracting valuable information from the remotely sensed data. This information can be utilized for various purposes, such as land use and land cover mapping, urban planning, agriculture monitoring, natural resource management, and environmental studies, among others. By categorizing the pixels into different classes, image classification simplifies the data and makes it easier for users to analyze and understand spatial patterns, trends, and relationships.
+
+**modeling and prediction step** in the machine learning (ML) pipeline:
+1.  **Data Preprocessing:**
+    * Cleaning and correcting raw data (e.g., Radiometric/Atmospheric Correction).
+    * Preparing the study area (e.g., Clipping the image).
+    * **Feature Extraction** (e.g., calculating spectral indices like **NDVI**).
+
+2.  **Training Data Generation:**
+    * (For Supervised ML) The analyst collects and labels representative **training data** (e.g., creating Regions of Interest or ROIs).
+
+3.  **Model Training/Clustering:**
+    * **Supervised:** The classification algorithm **learns** the relationship between the input features (pixel values) and the desired output labels (land cover classes) using the training data.
+    * **Unsupervised:** The clustering algorithm groups the pixels based purely on spectral similarity.
+
+4.  **Prediction (Classification):**
+    * The trained model or the clustering logic is applied to the **entire image**.
+    * The goal is to assign a discrete **class label** (e.g., "Forest," "Water") to every pixel or object.
+
+5.  **Model Evaluation:**
+    * The output classified map is assessed for **accuracy** (e.g., using a Confusion Matrix and Kappa coefficient) to determine the model's performance and reliability.
+
+DIFFERENT CLASSIFICATION METHODS
+
+1. **Part one:** Unsupervised classification.
 
 * The tool you are going to run in QGIS will basically group pixels that have similar spectral characteristics to classes or clusters **without** any additional information from the user (you).
 * **For example:** pixels that have really high NIR values could be grouped as one cluster because maybe these pixels have vegetation in them.
 
-**Part two:** Supervised classification.
+2. **Part two:** Supervised classification.
 
-* The tool will take additional information (training data) and *then* it will look at the spectral characteristics of each pixel and group into classes accordingly. You are going to be the source of this training data (more on this below).
+* The tool will take additional information (training data) and *then* it will look at the spectral characteristics of each pixel and group into classes accordingly. You are going to be the source of this training data.
+* Supervised image classification is a method where the user provides a set of labeled training samples for each class of interest. The classifier algorithms use these training samples to learn the characteristics of each class and then apply this knowledge to classify the entire image into the specified categories. This method relies on the user’s expertise and understanding of the study area and typically results in higher accuracy compared to unsupervised classification.
+   * **Key components of supervised classification:**
+      * **Training samples:** These are representative examples of each class of interest, selected by the user based on their knowledge of the study area. The quality and quantity of training samples directly affect the classification accuracy.
+      * **Classifier algorithms:** These are machine learning algorithms that learn from the provided training samples and generalize this knowledge to classify the entire image, including:
+         * **Maximum likelihood classifier:** A statistical-based algorithm that assumes each class follows a Gaussian distribution and assigns pixels to the class with the highest likelihood based on their spectral values.
+         * **Support vector machines:** A machine learning algorithm that finds the optimal hyperplane to separate different classes by maximizing the margin between them.
+         * **Decision trees:** A hierarchical approach that splits the data into subsets based on specific rules or conditions at each node of the tree until the pixel is assigned to a class.   
 
+3. **Deep Learning**(in the comming labs): Uses advanced neural networks (like Convolutional Neural Networks, or CNNs) to classify data. These models automatically learn complex features from the raw data, often leading to very high accuracy.
+   
 # Part One: Unsupervised classification
 First, consider: what is it you would like to investigate about the landscape? How will you set up your classification schema? Create a classification key with class, value, and color as columns for reference. You have to freedom over what this looks like and it is purely for reference. Use excel, notepad, or word create one. Here is mine:
 | Class | Value | Color |
