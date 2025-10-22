@@ -108,7 +108,11 @@ First, consider: what is it you would like to investigate about the landscape? H
 
 ### 4. K-Means Clustering:
 
-* Search for **K-means clustering for grids** in your toolbox window
+* You need to first go to "**Plugins**" - Manage and Install Plugins - to search **SAGA**
+* Install "**Processing Saga NextGen Provider**" and its patch "**Dissect and dissolve overlaps(Saga NextGen)**"
+  
+  
+* Search for **K-means clustering for grids** in your **toolbox window**
 * Input the clipped rasters from above. Set the **Number of Clusters** based on your classification key (for example, 5 clusters for 5 land cover classes).
 * Adjust the **Iterations** to control how many times the algorithm tries to classify pixels (usually around 10-20 iterations). More on the [tool](https://saga-gis.sourceforge.io/saga_tool_doc/2.2.4/imagery_classification_1.html).
 * Run the tool. See the parameters I used:
@@ -141,7 +145,5 @@ You need to upload a PDF answering below questions:
    * What is the K nearest neighbors algorithm doing?
    * What kinds of biases could be introduced in the training process?
    * How was your training data distributed spatially? Did you favor a particular area of the image?
-   * Around how many observations did you have for each class?
-   * What input raster bands did you use when predicting?
-   * 
+
 Insert screenshots of the unsupervised result, and your supervised results with brief figure captions.
