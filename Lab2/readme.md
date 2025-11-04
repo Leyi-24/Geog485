@@ -139,16 +139,13 @@ See if your output looks any better than this but remember this was unsupervised
 
 # Part Two: Supervised classification
 
-## Step1: Install Plugin Dzetsaka
+## Step1: Install Semi-Automatic Classification Plugin 
 
-Plugins -> Python Console -> At the bottom of your screen type this and press enter:
+Plugins -> Manage and install Plugins -> Search “Semi-Automatic Classification” -> Install
 
-import pip
-pip.main(['install', 'scikit-learn'])
+## Step2: Training Sites
 
-## Step2: Train a model
-
-### Create a Point Geometry
+### Use SCP to train
 
 * **Option 1**: You can search the toolbox for a tool called random points in extent
    * 10 points minimum per class (so 50 points if you are going for 5 classes)
