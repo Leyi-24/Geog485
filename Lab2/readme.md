@@ -141,10 +141,35 @@ See if your output looks any better than this but remember this was unsupervised
 
 ## Step1: Install Plugin Dzetsaka
 
-Plugins -> Python Console -> At the bottom of your screen type this and press enter:
+Close QGIS completely.
 
-import pip
-pip.main(['install', 'scikit-learn'])
+Open the OSGeo4W Shell, run:
+"python -m pip install joblib"
+
+Until you received "Successfully installed joblib-1.5.2"
+
+You may also receive a **Notice** saying there is a new version of pip 25.3, run:
+"python -m pip install --upgrade pip"
+
+Once you get "Successfully installed pip=25.3", run:
+"python -m pip install scikit-learn"
+
+Finally, you should receive "Successfully installed scikit-learn-1.7.2 threadpoolctl-3.6.9".
+
+Then open QGIS -> Plugins -> Python Console -> At the bottom of your screen type this and press enter:
+
+"
+import joblib
+print(joblib.__version__)
+
+import sklearn
+print(sklearn.__version__)
+"
+
+If it prints a version number (e.g. 1.5.2) of both of them, you’re good to go!
+
+Then you go back to Plugins -> Manage and install plugins -> Search for Dzetsaka, and install it.
+Now when execute the below steps, the Dzetsaka plugin should not report errors.
 
 ## Step2: Train a model
 
@@ -182,10 +207,10 @@ pip.main(['install', 'scikit-learn'])
 
    * Once you have saved your models for each band you are ready to make predictions (I saved three models for bands 6, 5, and 4 from a Landsat 1 image)
    * Open the processing toolbox –> dzetsaka
-   * Classification tool
-   * Predict model
-   * Input raster: Landsat B4 clipped to start
-   * Model learned is my B4 model from the above step
+   * Classification tool -> Predict model
+   * Input raster: Your False Color composite(clipped)
+   * Mask raster(optional): leave it empty
+   * Model learned: The model you saved when doing train algorithm
    * Output raster is saved in output data folder as a tif
    * Confidence raster is saved in output data folder as a tif with a unique name
    * RUN
