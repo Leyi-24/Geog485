@@ -139,8 +139,67 @@ See if your output looks any better than this but remember this was unsupervised
 
 # Part Two: Supervised classification
 
-If the Plugin Dzetsaka and Semi-automatic Classification Plugin cannot work in your QGIS,
-That means the scikit-learn was not fully install into your QGIS Python environment.
+## Step1: Install Plugin Dzetsaka
 
-Try this program on Colab[!Colab](https://colab.research.google.com/drive/1vQpgTs_JQ3s3_r2zouVaEYxl4zeQ1-ip?usp=sharing) using GEE API. (Dont forget to dublicate one to your own Google Drive, and **change your project ID**!)
-(Currently under development)
+Plugins -> Python Console -> At the bottom of your screen type this and press enter:
+
+import pip
+pip.main(['install', 'scikit-learn'])
+
+## Step2: Train a model
+
+### Create a Point Geometry
+
+* **Option 1**: You can search the toolbox for a tool called random points in extent
+   * 10 points minimum per class (so 50 points if you are going for 5 classes)
+   * input extent: calculate from layer and use the shapefile from step 2 in the unsupervised classification section.
+   * You can set a mimimum distance in between points. This is up to you.
+   * Right-click the points layer and select attribute table
+   * You will need a value column and you will need to adjust the value of each point in your table depending on where it lies within a true or false color image. For this you can reference your **key**! You should also add a class column that will be the label (i.e., forest, grass, urban).
+
+* **Option 2**: You can create a new points shapefile and manually place your points
+
+   * Layer -> Create Layer -> New Shapefile layer -> recall the way you created the clip frame for the unsupervised classification section except geometry type will be points
+   * <img width="602" height="665" alt="1" src="https://github.com/user-attachments/assets/1431a65c-8707-4c91-be8e-669b8ea6f365" />
+
+   * **OK**
+   * Change the points symbology so it is a bright color and then start adding points
+   * Now **toggle editing** and add points using your true or false color as a reference
+   * Each point you add, you have the option to set the value or id (for this you will refer to your key and assess what you see visually in true or false color). Essentially this is just a number you assign it 1-5 based on what class it falls in when you look at an image.
+   * Right-click the layer after your save your changes and turn off editing and select attribute table to see how this looks. Feel free to add more columns to match your key. You should also add a class column that will be the label (i.e., forest, grass, urban).
+   * <img width="602" height="543" alt="2" src="https://github.com/user-attachments/assets/cc39c9de-ffcd-4fae-b944-19e8e1526ffa" />
+
+* **Considerations**:
+   * The first option is random so you might get some points that fall within vegetation pixels and way more that fall within water pixels so there is a bias.
+   * The second option is tedious but you have full control over placement. Shoot for at least 10 points per class, so 50 points in total if you are trying to classify the image into 5 distinct classes.
+   * ![train_pts_overlay](https://github.com/user-attachments/assets/77bd4dbc-f3ee-40fc-9314-e38690fca9ec)
+
+### Train algorithm
+   * dzetsaka -> Classification tool -> Train algorithm.
+   * ![dzetsaka_train_params](https://github.com/user-attachments/assets/cd97a8fd-3b2c-48c3-9ea0-075a848d0de2)
+
+## Step3: Predictions from a trained model
+
+   * Once you have saved your models for each band you are ready to make predictions (I saved three models for bands 6, 5, and 4 from a Landsat 1 image)
+   * Open the processing toolbox –> dzetsaka
+   * Classification tool
+   * Predict model
+   * Input raster: Landsat B4 clipped to start
+   * Model learned is my B4 model from the above step
+   * Output raster is saved in output data folder as a tif
+   * Confidence raster is saved in output data folder as a tif with a unique name
+   * RUN
+   * Change layer symbology to match your key
+   * ![model_prediction_params](https://github.com/user-attachments/assets/2c1dcb90-c566-4e45-abd4-4c9dd5022c3c)
+
+
+# Deliverables for both Part 1 and Part 2
+You need to upload a PDF answering below questions:
+   * What is your research question?
+   * Did the unsupervised or supervised classification perform better and what makes you say so?
+   * What is the K-Means clustering algorithm doing? Check out google or the QGIS documentation for the tool
+   * What is the K nearest neighbors algorithm doing?
+   * What kinds of biases could be introduced in the training process?
+   * How was your training data distributed spatially? Did you favor a particular area of the image?
+
+Insert screenshots of the unsupervised result, and your supervised results with brief figure captions.
