@@ -139,4 +139,8 @@ See if your output looks any better than this but remember this was unsupervised
 
 # Part Two: Supervised classification
 
-To be updated by 4th Nov night.
+If the Plugin Dzetsaka and Semi-automatic Classification Plugin cannot work in your QGIS,
+That means the scikit-learn was not fully install into your QGIS Python environment.
+
+Try this program on Colab[!Colab](https://colab.research.google.com/drive/1vQpgTs_JQ3s3_r2zouVaEYxl4zeQ1-ip?usp=sharing) using GEE API. (Dont forget to dublicate one to your own Google Drive, and **change your project ID**!)
+(Currently under development)
