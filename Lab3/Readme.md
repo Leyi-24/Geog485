@@ -48,8 +48,8 @@ library(sf)
 library(stars)
 
 # Now we need to set the working directory. This is the filepath where we are going to be working from.
-setwd("R:/Geog485_585/Class_Data/Lab4_1/")
-setwd("/Users/wancher/Documents/rs_485/input_data/")
+setwd("R:/Geog485_585_12268_FALL2025/Student_Data/Lab3/") # Here you need to first copy the data folder from Class_data to your Student_data folder, then change the PATH.
+
 ```
 
 First, lets bring in some lidar data and take a look at it.
