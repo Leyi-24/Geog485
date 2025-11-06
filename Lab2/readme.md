@@ -141,35 +141,29 @@ See if your output looks any better than this but remember this was unsupervised
 
 ## Step1: Install Plugin Dzetsaka
 
-Close QGIS completely.
+* Close QGIS completely.
+* Open the OSGeo4W Shell, run:
+```python -m pip install joblib```
+* Until you receive "Successfully installed joblib-1.5.2"
 
-Open the OSGeo4W Shell, run:
-"python -m pip install joblib"
-
-Until you received "Successfully installed joblib-1.5.2"
-
-You may also receive a **Notice** saying there is a new version of pip 25.3, run:
-"python -m pip install --upgrade pip"
-
-Once you get "Successfully installed pip=25.3", run:
-"python -m pip install scikit-learn"
-
-Finally, you should receive "Successfully installed scikit-learn-1.7.2 threadpoolctl-3.6.9".
-
-Then open QGIS -> Plugins -> Python Console -> At the bottom of your screen type this and press enter:
-
-"
-import joblib
-print(joblib.__version__)
-
-import sklearn
-print(sklearn.__version__)
-"
-
+* You may also receive a **Notice** saying there is a new version of pip 25.3, run:
+```python -m pip install --upgrade pip```
+* You should receive "Successfully installed pip=25.3"
+* Then install scikit-learn:
+```"python -m pip install scikit-learn```
+* Finally, you should receive "Successfully installed scikit-learn-1.7.2 threadpoolctl-3.6.9".
+ 
+* Then open QGIS -> Plugins -> Python Console -> At the bottom of your screen, type this and press enter:
+```
+   import joblib
+   print(joblib.__version__)
+   import sklearn
+   print(sklearn.__version__)
+```
 If it prints a version number (e.g. 1.5.2) of both of them, you’re good to go!
 
 Then you go back to Plugins -> Manage and install plugins -> Search for Dzetsaka, and install it.
-Now when execute the below steps, the Dzetsaka plugin should not report errors.
+Now, when executing the steps below, the Dzetsaka plugin should not report errors.
 
 ## Step2: Train a model
 
@@ -178,7 +172,7 @@ Now when execute the below steps, the Dzetsaka plugin should not report errors.
 * **Option 1**: You can search the toolbox for a tool called random points in extent
    * 10 points minimum per class (so 50 points if you are going for 5 classes)
    * input extent: calculate from layer and use the shapefile from step 2 in the unsupervised classification section.
-   * You can set a mimimum distance in between points. This is up to you.
+   * You can set a minimum distance in between points. This is up to you.
    * Right-click the points layer and select attribute table
    * You will need a value column and you will need to adjust the value of each point in your table depending on where it lies within a true or false color image. For this you can reference your **key**! You should also add a class column that will be the label (i.e., forest, grass, urban).
 
