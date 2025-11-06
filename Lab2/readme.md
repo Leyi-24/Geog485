@@ -150,7 +150,7 @@ See if your output looks any better than this but remember this was unsupervised
 ```python -m pip install --upgrade pip```
 * You should receive "Successfully installed pip=25.3"
 * Then install scikit-learn:
-```"python -m pip install scikit-learn```
+```python -m pip install scikit-learn```
 * Finally, you should receive "Successfully installed scikit-learn-1.7.2 threadpoolctl-3.6.9".
  
 * Then open QGIS -> Plugins -> Python Console -> At the bottom of your screen, type this and press enter:
