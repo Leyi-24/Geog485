@@ -35,8 +35,8 @@ Sys.setenv(PATH = paste("C:/Users/leyi/rtools44/x86_64-w64-mingw32.static.posix/
                         Sys.getenv("PATH"), sep=""))
 ', file.path(Sys.getenv("R_USER"), ".Rprofile"), useBytes = TRUE)
 ```
-Now quite RStudio and Restart.
-you might need these packages if you cannot plot your point cloud
+Now quit RStudio and Restart.
+You might need these packages if you cannot plot your point cloud
 #https://www.xquartz.org/ #install this and unzip if running on macOS
 
 ```
@@ -68,13 +68,13 @@ plot(las)
 
 las # run this code and it will give you a basic summary of the object
 ```
-# SECTION TURN IN
+## SECTION TURN IN
 
-Take a screenshot of your point cloud
-What is the difference between LAS and LAZ?
-What coordinate reference system is your data in?
-What is your point density?
-How much area does your data cover?
+  * Take a screenshot of your point cloud
+  * What is the difference between LAS and LAZ?
+  * What coordinate reference system is your data in?
+  * What is your point density?
+  * How much area does your data cover?
 
 * We are going to chunk our data so we can work with smaller files for subsequent steps.
 ```
@@ -97,7 +97,7 @@ plan(multisession, workers = availableCores() - 1) # create a parallel session. 
 newctg = catalog_retile(ctg)
 plot(newctg)
 ```
-## Point classification
+# Point classification
 
 One of the most important steps in processing lidar is classifying points to different categories. A lot of freely available aerial lidar already comes classified as part of a completed validated dataset. However, if you are the one producing the lidar from a drone you will need to classify the point cloud yourself. There are many standards when it comes to lidar data and most are controlled by ASPRS. To read more about the classification standards of ASPERS visit the link below. Table 3 contains the standard classification values and meanings set by ASPERS. We will just be focusing on classifying ground points in this lab.
 
@@ -136,16 +136,17 @@ plot_crossection <- function(las,
 
 plot_crossection(las_class, colour_by = factor(Classification))
 ```
-# SECTION TURN IN
+## SECTION TURN IN
 
-Take a screen shot of the cross section you created with the pmf function.
-How well did it perform?
-Did you have to use a different classification? If so, what did you end up using?
-What do you see in your classified point cloud?
+  * Take a screen shot of the cross section you created with the pmf function.
+  * How well did it perform?
+  * Did you have to use a different classification? If so, what did you end up using?
+  * What do you see in your classified point cloud?
 
-* Creating a digital surface model (DSM)
+## Creating a digital surface model (DSM)
 
 Lets start off by making a DSM. If you remember from lecture a DSM includes all ground and vegetaion points. Its like draping a sheet across the surface of everything that is there.
+
 ```
 dsm <- rasterize_canopy(las_class, res = 1, p2r(na.fill = tin()))
 col <- height.colors(25) # create a color profile
@@ -155,20 +156,20 @@ plot(dsm, col = col, main = "Digital Surface Model")
 summary(dsm) 
 hist(dsm)#repeat this for dtm and chm
 ```
-Creating a digital terrain model (DTM)
+## Creating a digital terrain model (DTM)
 
 One of the neatest things about lidar data is its ability to model what lies beneath the canopy. Where are old logging roads? Are there artifacts beneath the vegetation? What is the actual elevation of the land? Lets only look at the ground points and make another surface model of the terrain (DTM).
 
-#this one could take awhile
+#this one could take a while
 dtm <- rasterize_terrain(las_class, algorithm = kriging(k = 40))
 plot(dtm, main = "Digital Terrain Model") 
 ```
-# that doesnt look like much... lets make a hillsahde
+# that doesn't look like much... let's make a hillsahde
 dtm_prod <- terrain(dtm, v = c("slope", "aspect"), unit = "radians")
 dtm_hillshade <- shade(slope = dtm_prod$slope, aspect = dtm_prod$aspect)
 plot(dtm_hillshade, col =gray(0:30/30), legend = FALSE, main = "DTM Hillshade")
 ```
-Creating a canopy height model (CHM)
+## Creating a canopy height model (CHM)
 
 To look at the height of only the vegetation we need to subtract the height of the ground out of our data. Looking at the DSM you see individual trees, but the height data is a combination of both the ground height and the vegetation height. Lets get rid of the ground and look at the trees!
 ```
@@ -179,12 +180,12 @@ plot(las_norm, color = "Classification") # notice how the terrain is now complet
 chm <- rasterize_canopy(las_norm, res = 1, pitfree(thresholds = c(0, 10, 20), max_edge = c(0, 1.5)))
 plot(chm, col = col, main = "Canopy Height Model")#what are the units
 ```
-# SECTION TURN IN
+## SECTION TURN IN
 
-Screenshots of all terrain models and histograms.
-Report the average values of each model. You can copy summary(dsm) for dtm and chm models.
+  * Screenshots of all terrain models and histograms.
+  * Report the average values of each model. You can copy summary(dsm) for dtm and chm models.
 
-## Individual tree detection
+# Individual tree detection
 
 Now that we have the lidar processed and our terrain models generated, lets do something a bit more advanced. From the terrain data and the unclassified vegetation data there are methods of detecting and modeling every tree on the landscape. This can be useful in so many different ways! It can tell us the density of trees on the landscape, the height distrubution, and even estimate how much biomass there is in the living trees. For this lab we will locate each tree and create spatial data of the canopy area of each tree.
 
@@ -230,8 +231,8 @@ writeVector(vect(crowns), "data/output/Crowns/lidar_tree_crowns.shp")
 ```
 ## SECTION TURN IN
 
-Add your output rasters to a QGIS environment and change symbology. You can add these screenshots to your write up if you want.
-Additional processing with lasCatalog. No submission required here but worth knowing how to process larger datasets
+ * Add your output rasters to a QGIS environment and change symbology. You can add these screenshots to your write up if you want.
+ * Additional processing with lasCatalog. No submission required here but worth knowing how to process larger datasets
 
 At the very beginning of this exercise you created a catalog from the large lidar dataset to create smaller chunks that are much more manageable to analyze. In the same way your created these chunks you can analyze these as a whole unit to create complete output products for a whole area. There are many functions that work with the lasCatalog engine in lidR, including terrain modeling, tree segmentation, and classification. Below we are going to just create a DTM on the whole dataset. Remember that the dataset we used for this lab already had ground points classified, so lets just go ahead and run the analysis.
 
