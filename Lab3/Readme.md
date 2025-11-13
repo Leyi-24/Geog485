@@ -248,3 +248,35 @@ plot(ctg_dtm_hillshade, col =gray(0:30/30), legend = FALSE, main = "DTM Hillshad
 writeRaster(ctg_dtm, "data/output/ctg_DTM.tif", overwrite = TRUE)
 writeRaster(ctg_dtm_hillshade, "data/output/ctg_Hillshade.tif", overwrite = TRUE)
 ```
+# Part Two Photogrammetry
+
+Recall from lecture that we can make 3D from pictures! You could do this lab at various scales. For example, you could take various photos of any subject or object of interest from many angles and perspectives and stitch them together. (There are example images that you could use in the R drive that showcase this. Focus first on the drone imagery and then try to use different images to complete the steps below if you are feeling fancy).
+
+We will focus on the same study area as Lab 4.1, except we will be using drone images in true color, instead of LiDAR point clouds. Hence, the file type will be jpeg.
+
+You will use Agisoft to generate a model, mesh, and point cloud from your photos.
+
+## Steps to Process in Agisoft:
+Search for Agisoft on your machine. Should be Windows 64-bit professional. Agisoft is not free it is recommended to use the computers in SSIL to complete this lab.
+
+Drag your photos into the software/Workflow → Add Photos → Select all photos pressing SHIFT → add. They will be stored under a “Chunk”.
+
+Right-click the chunk with your images → Process /From Workflow → Align Photos.
+
+Right-click → Process → Build Model.
+
+Right-click → Process → Build Texture.
+
+Right-click → Process → Build Point Cloud.
+
+Right-click → Export → Export Point Cloud.
+
+### Post-Processing
+
+Take screenshots of your model, mesh, and point clouds. What is the utility of each type of file that you rendered?
+
+If it does not automatically display your model, mesh (texture), and point cloud, you need select the Model tab at the top of your screen, then “View mode.” The model is under model “solid”. You can display the texture in color.
+
+It is suggested that you run your .las or .laz file that is generated from the steps above through Part 1 from last week to process it further for DSM, DTM, and Hillshades. These can then be compared to the results from the NOAA LiDAR data from last week.
+
+As always, try to drag any TIFFs generated from your processing into QGIS and manipulate the symbology so you can infer more information. Sometimes it is insufficient to rely on one software for try to interpret data.
