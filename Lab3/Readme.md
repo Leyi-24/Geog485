@@ -161,9 +161,10 @@ hist(dsm)#repeat this for dtm and chm
 One of the neatest things about lidar data is its ability to model what lies beneath the canopy. Where are old logging roads? Are there artifacts beneath the vegetation? What is the actual elevation of the land? Lets only look at the ground points and make another surface model of the terrain (DTM).
 
 #this one could take a while
+```
 dtm <- rasterize_terrain(las_class, algorithm = kriging(k = 40))
 plot(dtm, main = "Digital Terrain Model") 
-```
+
 # that doesn't look like much... let's make a hillsahde
 dtm_prod <- terrain(dtm, v = c("slope", "aspect"), unit = "radians")
 dtm_hillshade <- shade(slope = dtm_prod$slope, aspect = dtm_prod$aspect)
@@ -236,9 +237,10 @@ writeVector(vect(crowns), "data/output/Crowns/lidar_tree_crowns.shp")
 
 At the very beginning of this exercise you created a catalog from the large lidar dataset to create smaller chunks that are much more manageable to analyze. In the same way your created these chunks you can analyze these as a whole unit to create complete output products for a whole area. There are many functions that work with the lasCatalog engine in lidR, including terrain modeling, tree segmentation, and classification. Below we are going to just create a DTM on the whole dataset. Remember that the dataset we used for this lab already had ground points classified, so lets just go ahead and run the analysis.
 
+```
 ctg_dtm <- rasterize_terrain(ctg, algorithm = tin()) # calling a catalog into a function runs that function through the lascatalog engine
 plot(ctg_dtm, main = "Digital Terrain Model") 
-```
+
 # that doesnt look like much... lets make a hillsahde
 ctg_dtm_prod <- terrain(ctg_dtm, v = c("slope", "aspect"), unit = "radians")
 ctg_dtm_hillshade <- shade(slope = ctg_dtm_prod$slope, aspect = ctg_dtm_prod$aspect)
